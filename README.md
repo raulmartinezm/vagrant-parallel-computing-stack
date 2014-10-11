@@ -1,6 +1,6 @@
 ## About
 
-Creates a parallel devopment enviroment provided with the tools necesary for a basic course in Parellel Computing. 
+Creates a parallel development enviroment provided with the tools necesary for a basic course in Parellel Computing. 
 It provides from one to a cluster of N virtualbox machines provisioned with:
 
 

@@ -4,8 +4,9 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-# Number of virtual machines that will be start and provisioned
+# Number of hosts and CPU(s) per host.
 num_nodes = 2
+num_cpu_host = 2
 
 # Select the name of the box that you prefer.
 base_box = "wheezy64"
@@ -52,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       # Configure memory for every node
       node.vm.provider "virtualbox" do |node|
-        node.customize ["modifyvm", :id, "--memory", node_memory]
+        node.customize ["modifyvm", :id, "--memory", node_memory, "--cpus", num_cpu_host]
       end
 
       node.vm.provision :puppet, prov_args do |puppet|
