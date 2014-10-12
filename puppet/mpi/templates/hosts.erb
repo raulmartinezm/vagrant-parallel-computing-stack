@@ -1,0 +1,5 @@
+127.0.0.1	localhost
+
+<% @cluster_hosts.zip(cluster_ips).each do |host,ip| -%>
+<%= ip %>	<%=host%>
+<% end -%>
