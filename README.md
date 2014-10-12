@@ -5,9 +5,14 @@ It provides from one to a cluster of N virtualbox machines provisioned with:
 
 
 - GNU C compiler (gcc).
-- GNU Fortran Compiler.
-- OpenMP C and Fortran library.
-- MPI C a Fortran library.
+- GNU Fortran Compiler (gfortran).
+- OpenMP library.
+- MPI library (mpich).
+
+- ScaLAPACK.
+- LAPACK.
+- PBLAS.
+- PETSc.
 
 ## Requirements
 

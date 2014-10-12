@@ -9,30 +9,51 @@ num_nodes = 2
 num_cpu_host = 2
 
 # Select the name of the box that you prefer.
-base_box = "wheezy64"
+base_box = "wheezy64_oct12"
 
 # Memory
 node_memory = 256
 
 # Path to shared directory between nodes
-shared_dir = "/shared"
+shared_dir = "/home/mpi"
 
 # Network
 base_ip = "10.0.0."
 ip_inc = 10
 
+# Prepare some variables for puppet
+hosts_info = Hash.new(0)
+hosts = ""
+ips   = ""
 
+(1..num_nodes).each do |index|
+  if index == 1
+    hostname = "master"
+  else
+    hostname = "node#{index-1}"
+  end
 
+  ipv4 = ip_inc * index
+  ip_address = "#{base_ip}#{ipv4}"
+
+# strings for facter  
+  hosts += "#{hostname},"
+  ips   += "#{ip_address},"
+
+  hosts_info[index] = [hostname, ip_address] 
+end
+
+# Start the configuration
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   (1..num_nodes).each do |index|
      
-    hostname = "parallelstack#{index}"
     ipv4 = ip_inc * index
     ip_address = "#{base_ip}#{ipv4}"
-    prov_args = {
+ 
+    prov_args= {
       :facter => {
-        "ip_addr"      => ip_address,
-        "join_ip"      => "#{base_ip}#{ip_inc}",
+        "hosts" => hosts,
+	"ips" => ips,
       }
     }
   	 
@@ -44,9 +65,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # config.vm.box_url = "http://domain.com/path/to/above.box"
   
     # Configuration for each node in the cluster
-    config.vm.define hostname do |node|
-      node.vm.host_name = hostname
-      node.vm.network  :private_network, ip: ip_address
+    config.vm.define hosts_info[index].first do |node|
+      node.vm.host_name = hosts_info[index].first
+      node.vm.network  :private_network, ip: hosts_info[index].last
 
       # Shared directory between all nodes. You can put MPI program here.
       node.vm.synced_folder "./shared", shared_dir
@@ -60,6 +81,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         puppet.manifests_path = "puppet"
         puppet.module_path    = "puppet"
         puppet.manifest_file  = "init.pp"
+#	puppet.options        = "--verbose --debug"
       end
     end
   end
