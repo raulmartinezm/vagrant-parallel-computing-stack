@@ -11,7 +11,7 @@ exec { 'apt-upgrade':
   require => Exec['apt-update'],
 }
 
-
+# Install compilers and build tools
 $enhancers = [ "build-essential", "gfortran", "sudo"]
 package { $enhancers: ensure => "installed" }
 
@@ -19,6 +19,7 @@ package { $enhancers: ensure => "installed" }
 $blas_pkg = ["libblas3"]
 
 package { $blas_pkg: ensure => "installed" }
+
 # Install LAPACK. 
 $lapack_pkg = ["liblapack3"]
 package { $lapack_pkg: ensure => "installed" }

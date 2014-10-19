@@ -14,9 +14,6 @@ base_box = "wheezy64_oct12"
 # Memory
 node_memory = 256
 
-# Path to shared directory between nodes
-shared_dir = "/home/mpi"
-
 # Network
 base_ip = "10.0.0."
 ip_inc = 10
@@ -66,11 +63,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
     # Configuration for each node in the cluster
     config.vm.define hosts_info[index].first do |node|
-      node.vm.host_name = hosts_info[index].first
+      node.vm.hostname = hosts_info[index].first
       node.vm.network  :private_network, ip: hosts_info[index].last
-
-      # Shared directory between all nodes. You can put MPI program here.
-      node.vm.synced_folder "./shared", shared_dir
 
       # Configure memory for every node
       node.vm.provider "virtualbox" do |node|
@@ -81,7 +75,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         puppet.manifests_path = "puppet"
         puppet.module_path    = "puppet"
         puppet.manifest_file  = "init.pp"
-#	puppet.options        = "--verbose --debug"
+	puppet.options        = "--verbose --debug"
       end
     end
   end
