@@ -1,6 +1,6 @@
 ## About
 
-Creates a parallel development enviroment provided with the tools necesary for a basic course in Parellel Computing. 
+Creates a parallel development enviroment provided with the basic tools to program and test a parallel C application.  
 It provides from one to a cluster of N virtualbox machines provisioned with:
 
 
@@ -36,20 +36,29 @@ Clone the repository in a directory in localhost.
     $ cd ~
     $ git clone http://whatever
 
+Configure the number of nodes editing the VagrantFile.
+
+    ...
+    # Number of hosts and CPU(s) per host.
+    num_nodes = 2
+    num_cpu_host = 2
+    ...
+
 Enter the directory and execute:
 
     $ vagrant up --provision
 
 Enter the main node:
 
-    $ vagrant ssh
+    $ vagrant ssh master
 
-Once logged into the node, you can find MPI and OpenMP code **examples** in */home/vagrant/examples*
+When execute a MPI program add the parameter **--mca btl_tcp_if_include "eth1"** to restrign vagrant's network interface. e.g:
+
+    $ mpiexec --mca btl_tcp_if_include "eth1" -np 4  -machinefile machinefile /vagrant/myprogram
+
 
 ## Usage in MacOS
-
+TODO
 
 ## Usage in Windows
-
-
-## Notes 
+TODO

@@ -1,3 +1,4 @@
 .vagrant
-.examples
-.shared/*
+machines
+examples
+tmp/
