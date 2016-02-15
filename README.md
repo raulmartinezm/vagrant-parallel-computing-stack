@@ -8,7 +8,6 @@ It provides from one to a cluster of N virtualbox machines provisioned with:
 - GNU Fortran Compiler (gfortran).
 - OpenMP library.
 - MPI library (mpich).
-
 - ScaLAPACK.
 - LAPACK.
 - PBLAS.
@@ -18,14 +17,6 @@ It provides from one to a cluster of N virtualbox machines provisioned with:
 
 - Vagrant
 - VirtualBox
-
-You'll need a Debian Vagrant base box added to your vagrant install with the name 'wheezy'. e.g:
-
-    $ vagrant box list
-    wheezy
-    ubuntu
-    centos
-    ...
 
 You can get pre-built Vagrant boxes from the internet or build your own with [veewee](https://github.com/jedi4ever/veewee/).
 
@@ -58,7 +49,13 @@ When execute a MPI program add the parameter **--mca btl_tcp_if_include "eth1"**
 
 
 ## Usage in MacOS
+
 TODO
 
 ## Usage in Windows
+
 TODO
+
+## License
+
+MIT

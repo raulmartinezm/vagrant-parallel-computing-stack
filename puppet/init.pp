@@ -28,7 +28,7 @@ package { $lapack_pkg: ensure => "installed" }
 
 
 # Install petsc libraries
-$hplibraries = ["libpetsc3.2", "libpetsc3.2-dbg", "libpetsc3.2-dev"]
+$hplibraries = ["libpetsc3.4.2", "libpetsc3.4.2-dbg", "libpetsc3.4.2-dev"]
 package { $hplibraries: ensure => "installed" }
 
 include mpi

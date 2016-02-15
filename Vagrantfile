@@ -9,7 +9,7 @@ num_nodes = 2
 num_cpu_host = 2
 
 # Select the name of the box that you prefer.
-base_box = "wheezy64_oct12"
+base_box = "ubuntu/trusty64"
 
 # Memory
 node_memory = 256
